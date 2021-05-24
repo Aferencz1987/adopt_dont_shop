@@ -81,4 +81,28 @@ RSpec.describe 'the pets index' do
     expect(page).to have_content(pet_2.name)
     expect(page).to_not have_content(pet_3.name)
   end
+
+    it 'shows an application' do
+      shelter = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
+      pet_1 = Pet.create(adoptable: true, age: 7, breed: 'sphynx', name: 'Bare-y Manilow', shelter_id: shelter.id)
+      pet_2 = Pet.create(adoptable: true, age: 3, breed: 'domestic pig', name: 'Babe', shelter_id: shelter.id)
+      pet_3 = Pet.create(adoptable: true, age: 4, breed: 'chihuahua', name: 'Elle', shelter_id: shelter.id)
+
+      visit '/pets'
+
+      expect(page).to have_link("Start application for #{pet_2.name}")
+      click_link "Start application for #{pet_2.name}"
+      expect(current_path).to eq("/pet_applications/new")
+      fill_in :name, with: "Alex"
+      fill_in :street, with: "123 Dutch"
+      fill_in :city, with: "Denver"
+      fill_in :state, with: "Colorado"
+      fill_in :zip, with: "80226"
+      fill_in :reason, with: "Because animals are great"
+      expect(page).to have_button("Save")
+      click_button "Save"
+      pet_application = PetApplication.last
+      expect(current_path).to eq("/pet_applications/#{pet_application.id}") #its currently giving the application ID not the pet_id
+      expect(page).to have_content("Pending")
+    end
 end
