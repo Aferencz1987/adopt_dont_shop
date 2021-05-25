@@ -28,18 +28,19 @@ class PetApplicationsController < ApplicationController
   end
 
   def edit
-    @pet_application = PetApplication.find(params[id])
+    @pet_application = PetApplication.find(params[:id])
   end
 
-  # def update
-  #   shelter = Shelter.find(shelter_params[:id])
-  #   if shelter.update(shelter_params)
-  #     redirect_to '/shelters'
-  #   else
-  #     redirect_to "/shelters/#{shelter.id}/edit"
-  #     flash[:alert] = "Error: #{error_message(shelter.errors)}"
-  #   end
-  # end
+  def update
+    @pet_application = PetApplication.find(params[:id])
+    if params[:reason]
+      @pet_application.status = "Pending"
+      @pet_application.reason = params[:reason]
+      @pet_application.save
+    end
+
+    redirect_to "/pet_applications/#{@pet_application.id}"
+  end
 
   def destroy
     pet_application = PetApplication.find(params[:id])

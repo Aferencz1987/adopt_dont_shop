@@ -5,7 +5,6 @@
   <%= @pet_application.city%><br>
   <%= @pet_application.state%><br>
   <%= @pet_application.zip%><br>
-  <%= @pet_application.reason%><br>
   <%= @pet_application.status%><br>
   <br>
   <br>
@@ -16,10 +15,12 @@
   <% end %>
   <br><br>
 
-<% if @matching_pet!= nil %>
-  <% @matching_pet.each do |pet|%>
-  <%= link_to "#{pet.name}'s page", "/pets/#{pet.id}" %>
-  <%= link_to "Add #{pet.name} to application", "/pet_applications/#{@pet_application.id}/pets/#{pet.id}", method: :patch %>
+<% if @pet_application.status == "In Progress" %>
+  <% if @matching_pet!= nil %>
+    <% @matching_pet.each do |pet|%>
+    <%= link_to "#{pet.name}'s page", "/pets/#{pet.id}" %>
+    <%= link_to "Add #{pet.name} to application", "/pet_applications/#{@pet_application.id}/pets/#{pet.id}", method: :patch %>
+    <% end %>
   <% end %>
 <% end %>
   <br><br>
@@ -28,4 +29,12 @@
     <%= "#{pet.name} has been added" %><br>
     <% end %>
   <% end %>
+  <% if @pet_application.pets.count > 0 %>
+    <%= form_with url: "/pet_applications/#{@pet_application.id}/add_reason", method: :patch, local: true do |f| %>
+    <%= f.label :reason %>
+    <%= f.text_area :reason %>
+    <%= f.submit %>
+    <% end %>
+  <% end %>
+
   <br><br>
