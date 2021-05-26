@@ -12,19 +12,20 @@ class PetApplicationsController < ApplicationController
   end
 
   def new
+    @pet_application = PetApplication.new
   end
 
   def create
-    pet_application = PetApplication.new(pet_application_params)
+    @pet_application = PetApplication.new(pet_application_params)
 
-    pet_application.save
-    redirect_to "/pet_applications/#{pet_application.id}"
-    # if shelter.save
-    #   redirect_to '/shelters'
-    # else
-    #   redirect_to '/shelters/new'
-    #   flash[:alert] = "Error: #{error_message(shelter.errors)}"
-    # end
+    if @pet_application.save
+      redirect_to "/pet_applications/#{@pet_application.id}"
+    else
+      flash[:notice] = @pet_application.errors.full_messages.to_sentence
+      render :new
+      #newline change time
+    end
+
   end
 
   def edit
