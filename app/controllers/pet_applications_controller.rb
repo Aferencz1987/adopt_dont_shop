@@ -23,7 +23,6 @@ class PetApplicationsController < ApplicationController
     else
       flash[:notice] = @pet_application.errors.full_messages.to_sentence
       render :new
-      #newline change time
     end
 
   end
