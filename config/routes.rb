@@ -20,8 +20,8 @@ post '/pet_applications', to: 'pet_applications#create'
 get '/pet_applications', to: 'pet_applications#index'
 get '/pet_applications/:id', to: 'pet_applications#show'
 delete '/pet_applications/:id', to: 'pet_applications#destroy'
-patch '/pet_applications/:id/pets/:pet_id', to:'pet_applications#connect_pet_to_app'
-
+patch '/pet_applications/:id/pets/:pet_id', to: 'pet_applications#connect_pet_to_app'
+patch '/pet_applications/:id/add_reason', to: 'pet_applications#update'
 
 
 
