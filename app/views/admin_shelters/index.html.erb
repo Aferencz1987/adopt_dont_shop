@@ -1,0 +1,14 @@
+<h1> Shelters </h1>
+<br>
+  <% @shelters.each do |shelter| %>
+    <%= shelter.name %>
+    <br>
+  <% end %>
+<br><br>
+<h3> Shelters with pending applications are as follows: </h3>
+<br>
+  <% @pending_app_shelters.each do |shelter| %>
+    <%= shelter.name %>
+    <br>
+  <% end %>
+<br><br>

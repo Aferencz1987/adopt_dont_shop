@@ -8,6 +8,13 @@
   <%= @pet_application.status%><br>
   <br>
   <br>
+
+<% if @pet_application.pets.count > 0 %>
+  <% @pet_application.pets.each do |pet| %>
+    <%= "#{pet.name} has been added" %><br>
+  <% end %>
+<% end %>
+<br><br>
 <% if @pet_application.status == "In Progress" %>
   <%= form_with url: "/pet_applications/#{@pet_application.id}", method: :get, local: true do |f| %>
     <%= f.label  "search for pet" %>
@@ -30,12 +37,5 @@
       <%= f.text_area :reason %>
       <%= f.submit "Submit Application"%>
     <% end %>
-  <% end %>
-<% end %>
-
-  <br><br>
-<% if @pet_application.pets.count > 0 %>
-  <% @pet_application.pets.each do |pet| %>
-    <%= "#{pet.name} has been added" %><br>
   <% end %>
 <% end %>
