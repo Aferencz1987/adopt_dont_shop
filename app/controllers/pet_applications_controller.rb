@@ -33,12 +33,21 @@ class PetApplicationsController < ApplicationController
 
   def update
     @pet_application = PetApplication.find(params[:id])
+
     if params[:reason]
       @pet_application.status = "Pending"
       @pet_application.reason = params[:reason]
       @pet_application.save
     end
+    all_approved = @pet_application.pets.all? do |pet|
+      pet.status(@pet_application) == "Approved"
+    end
 
+    if all_approved == true
+      @pet_application.status = "Approved"
+      @pet_application.save
+      require "pry"; binding.pry
+    end
     redirect_to "/pet_applications/#{@pet_application.id}"
   end
 
