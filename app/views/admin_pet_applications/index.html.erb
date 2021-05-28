@@ -1,0 +1,12 @@
+
+<h1> Adoption Sets </h1>
+<% @pets_pet_app.each do |apps| %>
+  <%= apps.pet_application.name %>
+  wants to adopt <br>
+  <%= apps.pet.name %>
+  <br>
+  <%= apps.status %>
+  <br>
+<% end %>
+<br>
+<br>

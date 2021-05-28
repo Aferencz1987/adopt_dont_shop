@@ -15,15 +15,13 @@ Rails.application.routes.draw do
   patch '/pets/:id', to: 'pets#update'
   delete '/pets/:id', to: 'pets#destroy'
 
-get '/pet_applications/new', to: 'pet_applications#new'
-post '/pet_applications', to: 'pet_applications#create'
-get '/pet_applications', to: 'pet_applications#index'
-get '/pet_applications/:id', to: 'pet_applications#show'
-delete '/pet_applications/:id', to: 'pet_applications#destroy'
-patch '/pet_applications/:id/pets/:pet_id', to: 'pet_applications#connect_pet_to_app'
-patch '/pet_applications/:id/add_reason', to: 'pet_applications#update'
-
-
+  get '/pet_applications/new', to: 'pet_applications#new'
+  post '/pet_applications', to: 'pet_applications#create'
+  get '/pet_applications', to: 'pet_applications#index'
+  get '/pet_applications/:id', to: 'pet_applications#show'
+  delete '/pet_applications/:id', to: 'pet_applications#destroy'
+  patch '/pet_applications/:id/pets/:pet_id', to: 'pet_applications#connect_pet_to_app'
+  patch '/pet_applications/:id/add_reason', to: 'pet_applications#update'
 
   get '/veterinary_offices', to: 'veterinary_offices#index'
   get '/veterinary_offices/new', to: 'veterinary_offices#new'
@@ -46,4 +44,10 @@ patch '/pet_applications/:id/add_reason', to: 'pet_applications#update'
   get '/veterinary_offices/:veterinary_office_id/veterinarians', to: 'veterinary_offices#veterinarians'
   get '/veterinary_offices/:veterinary_office_id/veterinarians/new', to: 'veterinarians#new'
   post '/veterinary_offices/:veterinary_office_id/veterinarians', to: 'veterinarians#create'
+
+  get '/admins/shelters', to: 'admin_shelters#index'
+  patch '/admins/pet_applications/:id/pets/:pet_id/approved', to: 'admin_pet_applications#approved'
+  patch '/admins/pet_applications/:id/pets/:pet_id/rejected', to: 'admin_pet_applications#rejected'
+  get '/admins/pet_applications', to: 'admin_pet_applications#index'
+  get '/admins/pet_applications/:id', to: 'admin_pet_applications#show'
 end
