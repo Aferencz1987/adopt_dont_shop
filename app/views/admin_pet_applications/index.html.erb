@@ -1,0 +1,18 @@
+
+<h1> Adoption Sets </h1>
+<% @pets_pet_app.each do |apps| %>
+  <%= apps.pet_application.name %>
+wants to adopt <br>
+  <%= apps.pet.name %>
+  <br>
+  <% if apps.status.nil? %>
+    <%= button_to 'Approve', "/admins/pet_applications/#{apps.pet_application.id}/pets/#{apps.pet.id}", method: :patch, local: true, params: {status: "Approved"}%>
+    <%= button_to 'Reject', "/admins/pet_applications/#{apps.pet_application.id}/pets/#{apps.pet.id}", method: :patch, local: true, params: {status: "Rejeted"} %>
+  <% else %>
+    <%= apps.status %>
+    <br>
+  <% end %>
+<% end %>
+<br>
+<br>
+<br>

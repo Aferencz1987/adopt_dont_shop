@@ -1,0 +1,13 @@
+<h1><%= @pet_application.name %>'s application </h1>
+
+<% @pet_application.pets.each do |pet| %>
+<%= pet.name %>
+  <% if pet.status(@pet_application) == "Approved" %>
+  Approved!
+  <% elsif pet.status(@pet_application) == "Rejected" %>
+  Rejected!
+  <% else %>
+  <%= button_to 'Approve', "/admins/pet_applications/#{@pet_application.id}/pets/#{pet.id}/approved", method: :patch, local: true %>
+  <%= button_to 'Reject', "/admins/pet_applications/#{@pet_application.id}/pets/#{pet.id}/rejected", method: :patch, local: true %>
+  <% end %>
+<% end %>

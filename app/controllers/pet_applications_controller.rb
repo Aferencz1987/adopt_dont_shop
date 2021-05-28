@@ -42,18 +42,6 @@ class PetApplicationsController < ApplicationController
     redirect_to "/pet_applications/#{@pet_application.id}"
   end
 
-  def approve
-    @pet_application = PetApplication.find(params[:id])
-    if params[:approved]
-      @pet_application.status == "Approved"
-      @pet_application.save
-    elsif
-      params[:rejected]
-      @pet_application.status == "Rejected"
-      @pet_application.save
-    end
-  end
-
   def destroy
     pet_application = PetApplication.find(params[:id])
     pet_application.destroy

@@ -12,4 +12,8 @@ class Pet < ApplicationRecord
   def self.adoptable
     where(adoptable: true)
   end
+
+  def status(pet_application)
+    PetsPetApp.find_by(:pet_application_id => pet_application.id, :pet_id => id).status
+  end
 end

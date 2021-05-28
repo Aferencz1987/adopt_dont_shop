@@ -4,7 +4,4 @@ class AdminSheltersController < ApplicationController
     @pending_app_shelters = Shelter.shelters_with_pending_app
   end
 
-  def show
-
-  end
 end

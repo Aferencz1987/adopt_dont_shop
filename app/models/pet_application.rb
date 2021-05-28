@@ -7,11 +7,8 @@ class PetApplication < ApplicationRecord
   has_many :pets_pet_apps
   has_many :pets, through: :pets_pet_apps
 
-# def self.approval
-#
-# end
 end
-[ ] done
+
 
 # Approving a Pet for Adoption
 
